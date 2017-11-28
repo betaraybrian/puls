@@ -5,17 +5,17 @@ var mcpadc = require('mcp-spi-adc');
 var pulseSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
   if (err) throw err;
 
-var rate = [0,0,0,0,0,0,0,0,0,0];
-
+var rate = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var signalRate = [512,512,512,512,512,512,512,512,512,512,512,512,512,512,512,512,512,512,512,512];
 var sampleCounter = 0;
 var lastBeatTime = 0;
 var P = 512;
 var T = 512;
-var thresh = 525;
+var thresh = 512;
 var amp = 100;
 var firstBeat = true;
 var secondBeat = false;
-
+var fuck = 540;
 
 
 var IBI = 600;
@@ -28,6 +28,8 @@ var N = 0;
 var currentTime = 0;
 var tal = 0;
 var runningTotal = 0;
+var signalTotal = 0;
+
 function add(a,b){
 	return a+b;
 }
@@ -39,7 +41,13 @@ setInterval(function () {
 
 
 Signal = reading.value * 1024;
-
+/*
+signalRate.splice(0,1);
+signalRate.push(Signal);
+signalTotal = signalRate.reduce(add, 0);
+signalTotal /= signalRate.length;
+Signal = signalTotal;
+*/
 currentTime = new Date().getTime();
 
 sampleCounter += currentTime - lastTime;
@@ -57,7 +65,7 @@ if(Signal > thresh && Signal > P){
 	P = Signal;
 }
 
-if(N > 325){
+if(N > 250){
 	if(Signal > thresh && Pulse == false && N > (IBI/5.0)*3){
 		Pulse = true;
 		IBI = sampleCounter - lastBeatTime;
@@ -99,17 +107,16 @@ if(N > 2500){
 	thresh = 512;
 	P = 512;
 	T = 512;
-	lastBeatTime = sampleCounter;
+	lastBeatTime = sampleCounter;x
 	firstBeat = true;
 	secondBeat = false;
 	BPM = 0;
 }
 
 tal ++;
-console.log(Signal);
-if(tal > 160){
-console.log("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-      //console.log("bpm "+ BPM + "  IBI = "+ IBI );
+
+if(tal > 200){
+      console.log("bpm "+ BPM + "  IBI = "+ IBI );
 	tal = 0;
 }
 
