@@ -1,7 +1,7 @@
 let firebase = require("firebase");
 let Player = require('player');
-let startTacton = require('./startTacton');
-let stopTacton = require('/stopTacton')
+var startTacton = require('./startTacton');
+var stopTacton = require('./stopTacton')
 
 let VOLUME_DOWN = "vol_down", VOLUME_UP = "vol_up", START = "start", STOP = "stop";
 
@@ -89,13 +89,13 @@ function onGestureReceived(gestureString){
     // Start gesture was received.
     // Play tacton
     console.log("start received");
-    startTacton.play();
+   startTacton.play();
 
   }
   if(gestureString == STOP){
     // Stop gesture was received.
     // Play tacton
-    stopTacton.play();
+  // stopTacton.play();
     console.log("stop received");
   }
 }

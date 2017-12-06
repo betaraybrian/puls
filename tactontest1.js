@@ -1,13 +1,4 @@
-module.exports = {
-
-
-
-
-
-
-
-	play: function play13(){
-		var rpio = require('rpio');
+var rpio = require('rpio');
 
 		var pin = 12;           /* P12/GPIO18 */
 		var range = 1024;       /* LEDs can quickly hit max brightness, so only use */
@@ -15,15 +6,9 @@ module.exports = {
 		var clockdiv = 8;       /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
 		var interval = 2;       /* setInterval timer, speed of pulses */
 		var times = 1;          /* How many times to pulse before exiting */
-	/*
-	 * Enable PWM on the chosen pin and set the clock and range.
-	 */
+	
 
-	rpio.open(pin, rpio.PWM);
-	rpio.pwmSetClockDivider(clockdiv);
-	rpio.pwmSetRange(pin, range);
-
-	/*
+/*
 	 * Sleep
 	 */
 	function sleep(milliseconds){
@@ -35,6 +20,17 @@ module.exports = {
 		}
 	}
 
+function play1(){
+/*
+	 * Enable PWM on the chosen pin and set the clock and range.
+	 */
+
+	rpio.open(pin, rpio.PWM);
+	rpio.pwmSetClockDivider(clockdiv);
+	rpio.pwmSetRange(pin, range);
+
+	
+
 	/*
 	 * Repeatedly pulse from low to high and back again until times runs out.
 	 */
@@ -43,10 +39,10 @@ module.exports = {
 	
         rpio.pwmSetData(pin, 450);
      
-        setTimeout(function(){rpio.pwmSetData(pin, 0);
-}, 500);
-
+        sleep(500);
+rpio.pwmSetData(pin, 0);
 
 	}
 
-}
+
+play1();
