@@ -201,6 +201,7 @@ function playStartTacton(){
   rpio.pwmSetData(pin, 450);
      
   setTimeout(function(){
+    console.log("Should close now KIG HER TROELS FOR FAN' DA!");
     rpio.pwmSetData(pin, 0);
   }, 500);
     
