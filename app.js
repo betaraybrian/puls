@@ -1,7 +1,5 @@
 let firebase = require("firebase");
 let Player = require('player');
-var startTacton = require('./startTacton');
-var stopTacton = require('./stopTacton')
 
 let VOLUME_DOWN = "vol_down", VOLUME_UP = "vol_up", START = "start", STOP = "stop";
 
@@ -79,20 +77,20 @@ function setupFirebaseListeners(){
 // Called whenever a gesture perfomed by the other person has been received.
 function onGestureReceived(gestureString){
 
-  if(gestureString == VOLUME_DOWN || gestureString == VOLUME_UP){
+  if(gestureString === VOLUME_DOWN || gestureString === VOLUME_UP){
     // Either volume up or down was recieved from the other person
     // We don't care about this
     return;
   }
 
-  if(gestureString == START){
+  if(gestureString === START){
     // Start gesture was received.
     // Play tacton
     console.log("start received");
-   startTacton.play();
+   playStartTacton();
 
   }
-  if(gestureString == STOP){
+  if(gestureString === STOP){
     // Stop gesture was received.
     // Play tacton
   // stopTacton.play();
@@ -180,3 +178,30 @@ function startPlaying(){
 
 }
 setupFirebase();
+
+
+function playStartTacton(){
+  console.log("Playing Start Tacton");
+  var rpio = require('rpio');
+
+  var pin = 12;           /* P12/GPIO18 */
+  var range = 1024;       /* LEDs can quickly hit max brightness, so only use */
+  var max = 1000;          /*   the bottom 8th of a larger scale */
+  var clockdiv = 8;       /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
+  var interval = 2;       /* setInterval timer, speed of pulses */
+  var times = 1;          /* How many times to pulse before exiting */
+
+  rpio.open(pin, rpio.PWM);
+	rpio.pwmSetClockDivider(clockdiv);
+  rpio.pwmSetRange(pin, range);
+  
+  var direction = 1;
+	var data = 0;
+	
+  rpio.pwmSetData(pin, 450);
+     
+  setTimeout(function(){
+    rpio.pwmSetData(pin, 0);
+  }, 500);
+    
+}
