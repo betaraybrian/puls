@@ -68,7 +68,6 @@ function setupFirebaseListeners(){
   sendGesture(START);
 
   setInterval(function(){
-    pulse = Pulse.getPulse();
     sendPulseValue(pulse);
   }, pulseSendDelay);
 
@@ -120,11 +119,11 @@ function sendPulseValue(pulseValue){
   ref.set(obj);
 }
 
-module.exports = {
-  setPulse : function(pulse){
-    savePulseValue(pulse);
-  }
+
+module.exports.setPulse = function(pulse){
+  savePulseValue(pulse);
 }
+
 
 // USE THIS FUNCTION TO SAVE PULSE VALUE TROELS
 // TROELS TROELS TROELS TROELS TROELS

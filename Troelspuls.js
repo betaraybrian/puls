@@ -68,7 +68,6 @@ if(Pulse == false && Signal > thresh && N > 325 && N < 1200 && N > (IBI /2)){
 	runningTotal = rate.reduce(add, 0);
 	runningTotal /= rate.length;
 	BPM = 60000/runningTotal;
-	app.setPulse(BPM);
       console.log("bpm "+ BPM + "  IBI = "+ IBI + "   signal  "+Signal+ "   thresh  "+thresh);
 }
 
