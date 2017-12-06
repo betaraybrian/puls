@@ -1,5 +1,7 @@
 let firebase = require("firebase");
 let Player = require('player');
+let startTacton = require('./startTacton');
+let stopTacton = require('/stopTacton')
 
 let VOLUME_DOWN = "vol_down", VOLUME_UP = "vol_up", START = "start", STOP = "stop";
 
@@ -87,12 +89,13 @@ function onGestureReceived(gestureString){
     // Start gesture was received.
     // Play tacton
     console.log("start received");
+    startTacton.play();
 
   }
   if(gestureString == STOP){
     // Stop gesture was received.
     // Play tacton
-
+    stopTacton.play();
     console.log("stop received");
   }
 }
@@ -104,11 +107,11 @@ function sendGesture(gesture){
   ref.set(obj);
 }
 
-function SENDSTART(){
+module.exports.sendStart = function(){
   sendGesture(START);
 }
 
-function SENDSTOP(){
+module.exports.sendStop = function(){
   sendGesture(STOP);
 }
 
