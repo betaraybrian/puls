@@ -6,7 +6,7 @@ var mcpadc = require('mcp-spi-adc');
 var pulseSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
   if (err) throw err;
 
-var rate = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var rate = [750,750,750,750,750,750,750,750,750,750];
 
 var sampleCounter = 0;
 var lastBeatTime = 0;
@@ -69,6 +69,7 @@ if(Pulse == false && Signal > thresh && N > 325 && N < 1200 && N > (IBI /2)){
 	runningTotal /= rate.length;
 	BPM = 60000/runningTotal;
       console.log("bpm "+ BPM + "  IBI = "+ IBI + "   signal  "+Signal+ "   thresh  "+thresh);
+app.setPulse(BPM);
 }
 
 if(Signal < thresh && Pulse == true){
