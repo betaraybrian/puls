@@ -25,6 +25,7 @@ let person = 1;
 
 // The person's current pulse
 let pulse = 120;
+let otherPulse = 90;
 
 // How often we send the pulse to the other person.
 // In milliseconds
@@ -69,6 +70,7 @@ function setupFirebaseListeners(){
 
   setInterval(function(){
     sendPulseValue(pulse);
+    addNewSong();
   }, pulseSendDelay);
 
   startPlaying();
@@ -136,8 +138,12 @@ function savePulseValue(newPulseValue){
 // Called when a new pulse value has been received
 function onPulseValueReceived(pulseValue){
   console.log("Pulse value received: "+pulseValue);
+  otherPulse = pulseValue;
+  
+}
 
-  let soundClip = getSoundFileFromPulseData(pulseValue);
+function addNewSong(){
+  let soundClip = getSoundFileFromPulseData(otherPulse);
   addSongToQueue(soundClip);
 }
 
