@@ -89,7 +89,6 @@ function onGestureReceived(gestureString){
     // Start gesture was received.
     // Play tacton
     console.log("start received");
-   playStartTacton();
 
   }
   if(gestureString === STOP){
