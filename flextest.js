@@ -13,13 +13,13 @@ var Index = 0;
 var Thumb = 0;
 var gesture = "none";
 
-var middle = mcpadc.open(1, {speedHz: 20000}, function (err) {
+var middle = mcpadc.open(4, {speedHz: 20000}, function (err) {
   if (err) throw err;
 });
-var index = mcpadc.open(2, {speedHz: 20000}, function (err) {
+var index = mcpadc.open(3, {speedHz: 20000}, function (err) {
   if (err) throw err;
 });
-var thumb = mcpadc.open(3, {speedHz: 20000}, function (err) {
+var thumb = mcpadc.open(5, {speedHz: 20000}, function (err) {
   if (err) throw err;
 });
 
@@ -52,9 +52,10 @@ else{gesture = "none";}
 	console.log(gesture);
 	if(gesture == "okay"){
 play1();
+}
 else{
 	rpio.pwmSetData(pin, 0);
-}
+
 }
 
   }, 1000);
