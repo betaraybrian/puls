@@ -106,10 +106,13 @@ function detectGestures(){
     sendGesture(gesture);
   }
   else{
+    if(gesture !== "none"){
+      canDetect = true;
+      doingCooldown = true;
+      detectTime = Date.now();
+    }
     gesture = "none";
-    canDetect = true;
-    doingCooldown = true;
-    detectTime = Date.now();
+    
   }
   
     console.log(gesture);
