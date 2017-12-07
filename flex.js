@@ -12,7 +12,7 @@ var detectTime = 0;
 var detectCooldown = 5000;
 var doingCooldown = false;
 
-var person = 1;
+var person = 2;
 
 var middle = mcpadc.open(4, {speedHz: 20000}, function (err) {
   if (err) throw err;
@@ -85,22 +85,22 @@ function readFromSensors(){
 }
 
 function detectGestures(){
-  if(Thumb > 0.27 && Index < 0.21 && Middle < 0.19 && canDetect){
+  if(Thumb < 0.23 && Index < 0.25 && Middle > 0.29 && canDetect){
     canDetect = false;
     gesture = "start";
     sendGesture(gesture);
   }
-  else if(Thumb > 0.27 && Index > 0.27 && Middle < 0.19 && canDetect){
+  else if(Thumb < 0.22 && Index > 0.27 && Middle < 0.19 && canDetect){
     canDetect = false;
     gesture = "vol_up";
     sendGesture(gesture);
   }
-  else if(Thumb < 0.27 && Index > 0.29 && Middle < 0.19 && canDetect){
+  else if(Thumb > 0.28 && Index <  0.19 && Middle < 0.18 && canDetect){
     canDetect = false;
     gesture = "vol_down";
     sendGesture(gesture);
   }
-  else if(Thumb > 0.29 && Index > 0.32 && Middle > 0.36 && canDetect){
+  else if(Thumb > 0.28 && Index > 0.30 && Middle > 0.33 && canDetect){
     canDetect = false;
     gesture = "stop";
     sendGesture(gesture);
