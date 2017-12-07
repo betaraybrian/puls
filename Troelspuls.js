@@ -3,7 +3,7 @@
 let app = require("./app");
 var mcpadc = require('mcp-spi-adc');
 
-var pulseSensor = mcpadc.open(0, {speedHz: 20000}, function (err) {
+var pulseSensor = mcpadc.open(6, {speedHz: 20000}, function (err) {
   if (err) throw err;
 
 var rate = [750,750,750,750,750,750,750,750,750,750];
